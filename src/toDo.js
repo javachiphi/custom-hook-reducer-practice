@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import {
   ListItem,
   ListItemText,
@@ -13,10 +13,9 @@ import useToggle from "./hooks/useToggleState";
 import EditToDoForm from "./editToDoForm";
 import { DispatchContext } from "./context/todos.context";
 
-export default function ToDo({ id, task, completed }) {
+function ToDo({ id, task, completed }) {
   const [isEditing, toggle] = useToggle(false);
   const dispatch = useContext(DispatchContext);
-
   return (
     <ListItem style={{ height: "64px" }}>
       {isEditing ? (
@@ -54,3 +53,5 @@ export default function ToDo({ id, task, completed }) {
     </ListItem>
   );
 }
+
+export default memo(ToDo);
