@@ -5,14 +5,14 @@ import { TodoContext } from "./context/todos.context";
 
 export default function ToDoForm() {
   const [value, handleChange, reset] = useInputState("");
-  const { addTodo } = useContext(TodoContext);
+  const { dispatch } = useContext(TodoContext);
 
   return (
     <Paper sx={{ margin: "1rem 0", padding: "0 1rem" }}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          addTodo(value);
+          dispatch({ type: "ADD", task: value });
           reset();
         }}
         style={{ marginLeft: "1rem", width: "50%" }}

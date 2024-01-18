@@ -6,16 +6,15 @@ import { TodoContext } from "./context/todos.context";
 
 export default function TodoList() {
   const { todos } = useContext(TodoContext);
-
   if (todos.length)
     return (
       <Paper>
         <List>
           {todos.map((todo, i) => (
-            <>
-              <ToDo {...todo} key={todo.id} />
+            <div key={i}>
+              <ToDo {...todo} />
               {i < todos.length - 1 && <Divider />}
-            </>
+            </div>
           ))}
         </List>
       </Paper>

@@ -1,6 +1,6 @@
-import React, { createContext } from "react";
-// context calls the todostates hook and use these pieces and store as a value in the context
-import useTodoStates from "../hooks/useTodoStates";
+import React, { createContext, useReducer } from "react";
+import todoReducer from "../reducers/todo.reducer";
+// context calls the reducer hook and use these pieces and store as a value in the context
 
 const defaultTodos = [
   { id: 1, task: "Mow the lawn using goats", completed: false },
@@ -10,9 +10,9 @@ const defaultTodos = [
 export const TodoContext = createContext();
 
 export function TodoProvider(props) {
-  const todosStuff = useTodoStates(defaultTodos);
+  const [todos, dispatch] = useReducer(todoReducer, defaultTodos);
   return (
-    <TodoContext.Provider value={todosStuff}>
+    <TodoContext.Provider value={{ todos, dispatch }}>
       {props.children}
     </TodoContext.Provider>
   );
