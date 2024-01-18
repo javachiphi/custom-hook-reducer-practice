@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ListItem,
   ListItemText,
@@ -11,27 +11,17 @@ import Edit from "@mui/icons-material/Edit";
 import Cancel from "@mui/icons-material/Cancel";
 import useToggle from "./hooks/useToggleState";
 import EditToDoForm from "./editToDoForm";
+import { TodoContext } from "./context/todos.context";
 
-export default function ToDo({
-  id,
-  task,
-  completed,
-  removeTodo,
-  toggleTodo,
-  editTodo,
-}) {
-  // I can change the toggle with useToggleState but how do I change the state of todos?
+export default function ToDo({ id, task, completed }) {
   const [isEditing, toggle] = useToggle(false);
+  const { removeTodo, toggleTodo } = useContext(TodoContext);
+
   return (
     <ListItem style={{ height: "64px" }}>
       {isEditing ? (
         <>
-          <EditToDoForm
-            editTodo={editTodo}
-            id={id}
-            task={task}
-            toggleEditForm={toggle}
-          />
+          <EditToDoForm id={id} task={task} toggleEditForm={toggle} />
           <IconButton onClick={toggle}>
             <Cancel />
           </IconButton>
