@@ -11,11 +11,11 @@ import Edit from "@mui/icons-material/Edit";
 import Cancel from "@mui/icons-material/Cancel";
 import useToggle from "./hooks/useToggleState";
 import EditToDoForm from "./editToDoForm";
-import { TodoContext } from "./context/todos.context";
+import { DispatchContext } from "./context/todos.context";
 
 export default function ToDo({ id, task, completed }) {
   const [isEditing, toggle] = useToggle(false);
-  const { dispatch } = useContext(TodoContext);
+  const dispatch = useContext(DispatchContext);
 
   return (
     <ListItem style={{ height: "64px" }}>
