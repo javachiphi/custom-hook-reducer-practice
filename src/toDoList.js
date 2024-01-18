@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import { TodoContext } from "./context/todos.context";
 
 export default function TodoList() {
-  const { todos, removeTodo, toggleTodo } = useContext(TodoContext);
+  const { todos } = useContext(TodoContext);
 
   if (todos.length)
     return (
@@ -13,12 +13,7 @@ export default function TodoList() {
         <List>
           {todos.map((todo, i) => (
             <>
-              <ToDo
-                {...todo}
-                key={todo.id}
-                removeTodo={removeTodo}
-                toggleTodo={toggleTodo}
-              />
+              <ToDo {...todo} key={todo.id} />
               {i < todos.length - 1 && <Divider />}
             </>
           ))}
