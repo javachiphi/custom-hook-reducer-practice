@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React from "react";
+import useTodoStates from "./hooks/useTodoStates";
 import TodoList from "./toDoList";
 import ToDoForm from "./toDoForm";
 import { AppBar, Toolbar, Paper, Grid } from "@mui/material";
@@ -11,34 +11,8 @@ const initialTodos = [
 ];
 
 export default function TodoApp() {
-  const [todos, setTodos] = useState(initialTodos);
-  const addTodo = (newTodoText) => {
-    setTodos([...todos, { id: 4, task: newTodoText, completed: false }]);
-  };
-  // even if I call toggle state here (does it persist for this to arrive?)
-  // if not how do I change the state of todos?
-
-  const removeTodo = (todoId) => {
-    // filter out removed todo
-    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
-    // call setTodos with new todos array
-    setTodos(updatedTodos);
-  };
-
-  const toggleTodo = (todoId) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(updatedTodos);
-  };
-
-  const editTodo = (todoId, value) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === todoId ? { ...todo, task: value } : todo
-    );
-
-    setTodos(updatedTodos);
-  };
+  const { todos, addTodo, removeTodo, toggleTodo, editTodo } =
+    useTodoStates(initialTodos);
 
   return (
     <Paper
